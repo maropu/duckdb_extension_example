@@ -1,0 +1,23 @@
+# name: test/sql/sayhello.test
+# description: Run tests for the sayhello table function
+# group: [sayhello]
+
+require sayhello
+
+query T
+select * from sayhello();
+----
+Hello, DuckDB!
+
+statement ok
+SET sayhello_target='Taro';
+
+query T
+select * from sayhello();
+----
+Hello, Taro!
+
+query T
+select * from sayhello('Jiro');
+----
+Hello, Jiro!
