@@ -1,5 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build and test](https://github.com/maropu/duckdb_extension_example/actions/workflows/build_and_tets.yml/badge.svg)](https://github.com/maropu/duckdb_extension_example/actions/workflows/build_and_tets.yml)
+[![Build and test](https://github.com/maropu/duckdb_extension_example/actions/workflows/build_and_tests.yml/badge.svg)](https://github.com/maropu/duckdb_extension_example/actions/workflows/build_and_tests.yml)
 
 This repository shows you how to implement a simple table function for saying hello in DuckDB.
 If you look for a general DuckDB extension template, please see [duckdb/extension-template](https://github.com/duckdb/extension-template).
