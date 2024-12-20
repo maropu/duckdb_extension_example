@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
     env:
-      RUST_BACKTRACE: 1
+      DUCKDB_GIT_VERSION: "v1.1.3"
     steps:
       - name: Checkout pg_stats_exporter repository
         uses: actions/checkout@v3
@@ -24,7 +24,9 @@ jobs:
           toolchain: stable
           components: rustfmt, clippy
       - name: Checkout DuckDB source code
-        run: make duckdb
+        run: |
+          git submodule init && git submodule update
+          make set_duckdb_version
       - name: Build extension
         run: make
       - name: Run tests

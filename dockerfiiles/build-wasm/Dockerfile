@@ -28,15 +28,20 @@ RUN git clone https://github.com/emscripten-core/emsdk.git && \
   ./emsdk activate 3.1.57
 
 # Copy extension code into image
-COPY Makefile duckdb_extension_example/
-COPY CMakeLists.txt duckdb_extension_example/
-COPY duckconfigure duckdb_extension_example/
-COPY src duckdb_extension_example/src
+COPY . duckdb_extension_example/
+# COPY Makefile duckdb_extension_example/
+# COPY CMakeLists.txt duckdb_extension_example/
+# COPY extension_config.cmake duckdb_extension_example/
+# COPY makefiles duckdb_extension_example/makefiles
+# COPY .gitmodules duckdb_extension_example/
+# COPY duckdb duckdb_extension_example/duckdb
+# COPY src duckdb_extension_example/src
 
 # Compile extension
 RUN cd duckdb_extension_example && \
-  sed -i 's/DUCKDB_VERSION = 1.1.3/DUCKDB_VERSION = 1.1.1/g' Makefile && \
-  make duckdb && \
+  git submodule init && \
+  git submodule update && \
+  DUCKDB_GIT_VERSION=v1.1.1 make set_duckdb_version && \
   PATH=$PATH:/workspace/emsdk/upstream/emscripten make wasm_eh
 
 # Copy assembly into the top
