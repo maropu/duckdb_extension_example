@@ -11,6 +11,7 @@ If you look for a general DuckDB extension template, please see [duckdb/extensio
 |-- CMakeLists.txt                  // Root CMake build file
 |-- Makefile                        // Build script to wrap cmake
 |-- duckdb                          // DuckDB source files
+|-- extension_config.cmake          // Extension configure file included by DuckDB's build system
 |-- makefiles
 |   `-- duckdb_extension.Makefile   // common build configuration to compile extention, copied from `duckdb/extension-ci-tools`
 |-- src
