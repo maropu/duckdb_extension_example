@@ -11,7 +11,5 @@ EXT_FLAGS=\
 -DDUCKDB_EXTENSION_${EXTENSION_NAME}_TEST_PATH="$(PROJ_DIR)test/sql" \
 -DDUCKDB_EXTENSION_${EXTENSION_NAME}_EXT_VERSION="$(EXTENSION_VERSION)"
 
-EXT_CONFIG=${PROJ_DIR}extension_config.cmake
-
 # Include the Makefile from extension-ci-tools
 include makefiles/duckdb_extension.Makefile
