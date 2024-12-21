@@ -109,6 +109,12 @@ duckdb> SELECT * FROM sayhello();
 └────────────────┘
 ```
 
+# How to compile extensions for multiple platforms
+
+[The DuckDB document](https://duckdb.org/docs/extensions/working_with_extensions.html#platforms) says that extention binaries need to be built for each platform.
+To do so, you can use [duckdb/extension-ci-tools](https://github.com/duckdb/extension-ci-tools) to compile your extension for multiple platforms
+and please see an actual CI job to compiile this extension in [maropu/extension-ci-tools](https://github.com/maropu/extension-ci-tools/actions/workflows/duckdb_extension_example.yml).
+
 # Any Question?
 
 If you have any question, please feel free to leave it on [Issues](https://github.com/maropu/duckdb_extension_example/issues)
