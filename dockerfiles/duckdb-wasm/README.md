@@ -3,7 +3,7 @@
 ```
 $ docker build --tag duckdb-wasm .
 $ docker create -p 8080:8080 --name duckdb-wasm-app duckdb-wasm
-$ docker cp ../../assembly/duckdb-wasm/v1.1.1/wasm_eh/sayhello.duckdb_extension.wasm duckdb-wasm-app:/workspace/duckdb-wasm/packages/duckdb-wasm-app/build/release/extension_repository/v1.1.1/wasm_eh
+$ docker cp sayhello.duckdb_extension.wasm duckdb-wasm-app:/workspace/duckdb-wasm/packages/duckdb-wasm-app/build/release/extension_repository/v1.1.1/wasm_eh
 $ docker start duckdb-wasm-app
 ```
 
