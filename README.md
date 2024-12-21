@@ -25,9 +25,9 @@ If you look for a general DuckDB extension template, please see [duckdb/extensio
 `-- vcpkg.json                      // Dependency definition file
 ```
 
-# Running this example
+# How to run this example
 
-```bash
+```shell
 $ git submodule init
 $ git submodule update
 $ DUCKDB_GIT_VERSION=v1.1.3 make set_duckdb_version
@@ -67,6 +67,44 @@ D SELECT * FROM sayhello();
 │     Output     │
 │    varchar     │
 ├────────────────┤
+│ Hello, DuckDB! │
+└────────────────┘
+```
+
+# How to compile as WebAssembly code
+
+```shell
+// Compile as WebAssembly code
+$ cd dockerfiles/build-wasm
+$ docker build --tag duckdb-build-wasm ../.. -f ./Dockerfile
+$ docker create --name t duckdb-build-wasm
+$ docker cp t:/workspace/sayhello.duckdb_extension.wasm .
+$ docker rm t
+
+// Start a http server for duckdb-wasm
+cd ../duckdb-wasm
+$ docker build --tag duckdb-wasm .
+$ docker create -p 8080:8080 --name duckdb-wasm-app duckdb-wasm
+$ docker cp ../build-wasm/sayhello.duckdb_extension.wasm duckdb-wasm-app:/workspace/duckdb-wasm/packages/duckdb-wasm-app/build/release/extension_repository/v1.1.1/wasm_eh
+$ docker start duckdb-wasm-app
+```
+
+ - Access http://127.0.0.1:8080/ and then load the extension as follows:
+
+```sql
+DuckDB Web Shell
+Database: v1.1.1
+Package:  @duckdb/duckdb-wasm@1.11.0
+
+Connected to a local transient in-memory database.
+Enter .help for usage hints.
+
+duckdb> SET custom_extension_repository='http://127.0.0.1:8080/extension_repository';
+duckdb> LOAD sayhello;
+duckdb> SELECT * FROM sayhello();
+┌────────────────┐
+│ Output         │
+╞════════════════╡
 │ Hello, DuckDB! │
 └────────────────┘
 ```
