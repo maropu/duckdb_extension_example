@@ -29,13 +29,6 @@ RUN git clone https://github.com/emscripten-core/emsdk.git && \
 
 # Copy extension code into image
 COPY . duckdb_extension_example/
-# COPY Makefile duckdb_extension_example/
-# COPY CMakeLists.txt duckdb_extension_example/
-# COPY extension_config.cmake duckdb_extension_example/
-# COPY makefiles duckdb_extension_example/makefiles
-# COPY .gitmodules duckdb_extension_example/
-# COPY duckdb duckdb_extension_example/duckdb
-# COPY src duckdb_extension_example/src
 
 # Compile extension
 RUN cd duckdb_extension_example && \
