@@ -10,26 +10,27 @@ If you look for a general DuckDB extension template, please see [duckdb/extensio
 .
 |-- CMakeLists.txt                  // Root CMake build file
 |-- Makefile                        // Build script to wrap cmake
+|-- duckdb                          // DuckDB source files
+|-- makefiles
+|   `-- duckdb_extension.Makefile   // common build configuration to compile extention, copied from `duckdb/extension-ci-tools`
 |-- src
 |   |-- CMakeLists.txt              // CMake build file to list source files
 |   |-- include
 |   |   `-- sayhello.hpp            // Header file for this extension
 |   |-- sayhello.cpp                // Table function implementation
 |   `-- sayhello_extension.cpp      // Entrypoint where DuckDB loads this extension
-`-- test
-    `-- sql
-        `-- sayhello.test           // Test code
+|-- test
+|   `-- sql
+|       `-- sayhello.test           // Test code
+`-- vcpkg.json                      // Dependency definition file
 ```
 
 # Running this example
 
 ```bash
-$ make duckdb
-Cloning into 'duckdb'...
-...
-Note: switching to 'tags/v1.1.3'.
-...
-
+$ git submodule init
+$ git submodule update
+$ DUCKDB_GIT_VERSION=v1.1.3 make set_duckdb_version
 $ make
 mkdir -p build/release && \
 	cmake  -DEXTENSION_STATIC_BUILD=1 -DDUCKDB_EXTENSION_NAMES="sayhello" -DDUCKDB_EXTENSION_SAYHELLO_PATH="/Users/maropu/Repositories/duckdb/duckdb_extension_example/" -DDUCKDB_EXTENSION_SAYHELLO_SHOULD_LINK=0 -DDUCKDB_EXTENSION_SAYHELLO_LOAD_TESTS=1 -DDUCKDB_EXTENSION_SAYHELLO_TEST_PATH="/Users/maropu/Repositories/duckdb/duckdb_extension_example/test/sql" -DDUCKDB_EXTENSION_SAYHELLO_EXT_VERSION="1.0.0" -DOSX_BUILD_ARCH=  -DDUCKDB_EXPLICIT_PLATFORM='' -DCMAKE_BUILD_TYPE=Release -S ./duckdb/ -B build/release && \
