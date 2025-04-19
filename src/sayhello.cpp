@@ -7,7 +7,7 @@ namespace duckdb {
 const string SayHelloBindData::DEFAULT_SAYHELLO_TARGET = "DuckDB";
 
 static duckdb::unique_ptr<FunctionData> ExecuteBind(ClientContext &context, TableFunctionBindInput &input,
-													vector<LogicalType> &return_types, vector<string> &names) {
+                                                    vector<LogicalType> &return_types, vector<string> &names) {
 	return_types.emplace_back(LogicalType::VARCHAR);
 	names.emplace_back("Output");
 
@@ -56,7 +56,7 @@ void SayHelloFunction::RegisterFunction(DatabaseInstance &db) {
 
 	auto &config = DBConfig::GetConfig(db);
 	config.AddExtensionOption("sayhello_target", "The target name of saying hello",
-							  LogicalType::VARCHAR, Value(SayHelloBindData::DEFAULT_SAYHELLO_TARGET));
+	                          LogicalType::VARCHAR, Value(SayHelloBindData::DEFAULT_SAYHELLO_TARGET));
 }
 
 } // namespace duckdb
